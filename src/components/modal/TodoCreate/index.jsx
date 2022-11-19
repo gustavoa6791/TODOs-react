@@ -1,14 +1,23 @@
-//import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './style.css'
+import { TodoContext } from '../../../context/todoContext'
+
 
 function ModalTodoCreate({children}) {
-    return ReactDOM.createPortal(
-        <div className='ModalBackground'>
-            {children}
-        </div>,
-        document.getElementById('modal')
-    ) 
+
+    const {modalOpen} = React.useContext(TodoContext)
+
+    if (modalOpen){
+        return ReactDOM.createPortal(
+
+            <div className='ModalBackground'>
+                {children}
+            </div>
+            ,
+            document.getElementById('modal')
+        ) 
+    }
 }
 
 export default ModalTodoCreate

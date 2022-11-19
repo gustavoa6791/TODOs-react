@@ -26,27 +26,19 @@ function App(props) {
 
         <TodoContext.Consumer>
           {({todoListFilter, completeTodo, deleteTodo}) => (
-            <TodoList>
-              {todoListFilter.map(todo=>[
+            <TodoList
+              todoListFilter= {todoListFilter}
+              render = {todo=>(
                 <TodoItem key={todo.id}  text={todo.text} completed={todo.completed} completeTodo={()=>completeTodo(todo.id)} deleteTodo={()=>deleteTodo(todo.id)} />
-              ])}
-            </TodoList>
+              )}
+            />
           )}
         </TodoContext.Consumer>
-        
-        <TodoContext.Consumer>
-          {({modalOpen}) => {
-          
-            if (modalOpen) {
-              return(
-                <ModalTodoCreate>
-                  <TodoForm/>
-                </ModalTodoCreate>
-              )
-            }
-          }}
-        </TodoContext.Consumer>
 
+        <ModalTodoCreate>
+          <TodoForm/>
+        </ModalTodoCreate>
+        
         <ButtonCreate/> 
       </>
     </TodoProvider>
